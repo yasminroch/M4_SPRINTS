@@ -1,0 +1,38 @@
+#include <stdio.h>
+#include <stdlib.h>
+/*
+1 -  Faça uma função que recebe uma certa medida e ajusta ela percentualmente
+entre dois valores mínimo e máximo e retorna esse valor-se está mais para o
+mpinimo ou para o máximo
+*/
+int main() {
+  // valor em %
+  float valor;
+  printf("insira um valor para ajuste de porcentagem: ");
+  scanf("%f", &valor);
+  printf("valor %.2f", valor);
+  // valor mínimo
+  float ajuste_min;
+  printf("\ninsira o valor mínimo: ");
+  scanf("%f", &ajuste_min);
+  printf("valor mínimo %.2f", ajuste_min);
+  // valor máximo
+  float ajuste_max;
+  printf("\ninsira o valor máximo: ");
+  scanf("%f", &ajuste_max);
+  printf("valor %.2f", ajuste_max);
+  // se o valor max for menor que o min retornará como erro
+  if (ajuste_max <= ajuste_min) {
+    printf("\nInsira um valor maior que o mínimo");
+  }
+  if (valor <= ajuste_min) {
+    printf("\nO valor %.1f está mais próximo do valor mínimo %.1f", valor,
+           ajuste_min);
+  } else if (valor >= ajuste_min) {
+    printf("\nO valor %.1f está mais próximo do valor máximo %.1f", valor,
+           ajuste_max);
+  } else if (valor > ajuste_max) {
+    printf("\nO valor %.1f ultrapassou o valor máximo inserido %.f", valor,
+           ajuste_max);
+  }
+}
