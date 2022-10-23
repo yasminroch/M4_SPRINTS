@@ -1,0 +1,54 @@
+#include <stdio.h>
+#include <stdlib.h>
+/*
+4 - Faça duas funções que recebem um vetor com 4 posições que contém o valor da
+distância de um pequeno robô até cada um dos seus 4 lados. A primeira função
+deve retornar a direção de maior distância ("Direita", "Esquerda", "Frente",
+"Tras") e a segunda função deve retornar esta maior distância.
+*/
+int main(void) {
+  int posicoes[4];
+  int i;
+  int dist_maxima, resultado;
+  int direita, esquerda, frente, tras;
+  // chama função valor_max() e recebe o retorno
+  resultado = valor_max(dist_maxima);
+  // input dos valores
+  for (i = 0; i <= 3; i++) {
+    printf("Digite um valor: ");
+    scanf("%d", &posicoes[i]);
+    printf("valor digitado: %d\n", posicoes[i]);
+  }
+
+  // output dos valores
+  for (i = 0; i <= 3; i++) {
+    printf("vetor %d: %d\n", i, posicoes[i]);
+  }
+  direita = posicoes[0];
+  esquerda = posicoes[1];
+  frente = posicoes[2];
+  tras = posicoes[3];
+  // percorrendo o vetor para encontrar a distância máxima
+  dist_maxima = posicoes[0];
+  for (i = 0; i <= 3; i++) {
+    if (dist_maxima < posicoes[i])
+      dist_maxima = posicoes[i];
+  }
+  if (dist_maxima == posicoes[0])
+    printf("A distância máxima é a direita\n");
+  else if (dist_maxima == posicoes[1])
+    printf("A distância máxima é a esquerda\n");
+  else if (dist_maxima == posicoes[2])
+    printf("A distância máxima é a frente\n");
+  else
+    printf("A distância maior é a trás\n");
+  printf("O valor máximo da distância é: %d", dist_maxima);
+  return 0;
+}
+
+int valor_max(int dist_maxima) {
+  int resultado;
+  resultado = dist_maxima;
+  // retorna o valor para a função main
+  return (resultado);
+}
