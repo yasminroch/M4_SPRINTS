@@ -1,0 +1,39 @@
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+/*
+3 - Faça uma função que armazena uma medida inteira qualquer em um vetor
+fornecido. Note que como C não possui vetores nativos da linguagem, lembre-se
+que você precisa passar o valor máximo do vetor assim como a última posição
+preenchida. Evite também que, por acidente, um valor seja escrito em uma área de
+memória fora do vetor
+*/
+int main(void) {
+  int vetor[3];
+  int i;
+  int tamanho;
+  int valor_maximo;
+  // input dos valores
+  for (i = 0; i <= 2; i++) {
+    printf("Digite um valor: ");
+    scanf("%d", &vetor[i]);
+    printf("valor digitado: %d\n", vetor[i]);
+  }
+
+  // output dos valores
+  for (i = 0; i <= 2; i++) {
+    printf("vetor %d: %d\n", i, vetor[i]);
+  }
+  // tamanho do vetor
+  tamanho = sizeof(vetor) / sizeof(vetor[0]);
+  printf("tamanho do vetor: %d\n", tamanho);
+  // percorrendo o vetor para encontrar o valor máximo
+  valor_maximo = vetor[0];
+  for (i = 0; i <= 2; i++) {
+    if (valor_maximo < vetor[i])
+      valor_maximo = vetor[i];
+  }
+  printf("O valor máximo do vetor é: %d\n", valor_maximo);
+  printf("A última posição é índice %d e valor %d", i = 2, vetor[2]);
+  return 0;
+}
