@@ -1,0 +1,25 @@
+#include <stdio.h>
+#include <stdlib.h>
+// Faça uma função que pergunta ao usuário se ele deseja continuar o mapeamento
+// e retorna verdadeiro ou falso A função deve perguntar: "Digite 1 para parar o
+// mapeamento!" Se o usuário digitar 1, deve sair do loop while declarado acima
+// Em caso contrário, continua no loop acima e pergunta novamente
+
+int main(void) {
+  int digito;
+  int parar = 0;
+  int continuar = 1;
+  printf("Você deseja continuar? Se sim, digite 1, se não, digite 0");
+  scanf("%d", &digito);
+  printf("O valor digitado é %d:", digito);
+  while (digito == continuar) {
+    printf("\nVocê deseja continuar? Se sim, digite 1, se não, digite 0");
+    scanf("%d", &digito);
+    printf("O valor digitado é %d:", digito);
+  }
+  if (digito == parar) {
+    printf("\nComo você digitou o valor %d, você parou.", digito);
+  }
+
+  return 0;
+}
