@@ -1,14 +1,23 @@
-#include <stdio.h>
-#include <stdlib.h>
 /*
 2 - Faça uma função que simule a leitura de um sensor lendo o valor do teclado
 ao final a função retorna este valor
 */
 
-int main() {
-  int valor_teclado;
-  printf("insira o valor do teclado para leitura: ");
-  scanf("%d", &valor_teclado);
-  printf("valor lido pelo sensor: %d", valor_teclado);
-  return 0;
+#include <stdio.h>
+
+int read(){
+  int value;
+  scanf("%d", &value);
+  return value;
+}
+
+int main(){
+  printf("Digite os valores 0 ou 1\n");
+  int call = read();
+  if(call !=0 && call !=1){
+    printf("Digite um valor válido, sendo aceito apenas 0 ou 1");
+  }
+  else{
+    printf("Valor lido: %d\n Status: recebido", call);
+  }
 }
