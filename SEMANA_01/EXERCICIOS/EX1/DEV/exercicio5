@@ -10,13 +10,16 @@ int main(void) {
   int parar = 0;
   int continuar = 1;
   printf("Você deseja continuar? Se sim, digite 1, se não, digite 0");
+  //lê input
   scanf("%d", &digito);
   printf("O valor digitado é %d:", digito);
+  //loop cada vez que o usuário digitar 1(continuar)
   while (digito == continuar) {
     printf("\nVocê deseja continuar? Se sim, digite 1, se não, digite 0");
     scanf("%d", &digito);
     printf("O valor digitado é %d:", digito);
   }
+  //saída do loop wilhe e condição que para quando for digitado 0
   if (digito == parar) {
     printf("\nComo você digitou o valor %d, você parou.", digito);
   }
