@@ -5,18 +5,22 @@ ao final a função retorna este valor
 
 #include <stdio.h>
 
+//função que lê input
 int read(){
   int value;
+  //input a ser lido
   scanf("%d", &value);
   return value;
 }
-
 int main(){
   printf("Digite os valores 0 ou 1\n");
+  //variável que armazena a chamada da função read
   int call = read();
+  //condição se os inputs forem diferentes de 0 e 1
   if(call !=0 && call !=1){
     printf("Digite um valor válido, sendo aceito apenas 0 ou 1");
   }
+    //recebe o valor lido e imprime
   else{
     printf("Valor lido: %d\n Status: recebido", call);
   }
