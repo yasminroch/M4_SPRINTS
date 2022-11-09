@@ -1,0 +1,127 @@
+#include <EEPROM.h>
+#include <sdkconfig.h>
+
+//led verde
+int led1 = 3;
+//led vermelho
+int led2 = 9;
+//led amarelo
+int led3 = 15;
+//led azul
+int led4 = 5;
+//ldr responsável pela leitura
+int ldr = 11;
+//buzzer responsável por tocar um som específico para cada led
+int buzzer = 18;
+// botão 1 responsável por ligar os led
+int button1 = 6;
+//botão 2 responsável por zerar todos os valores
+int button2 = 7;
+
+//tipos de entrada e saída
+void setup(){
+  Serial.begin(115200);
+  pinMode(led1, OUTPUT);
+  pinMode(led2, OUTPUT);
+  pinMode(led3, OUTPUT);
+  pinMode(led4, OUTPUT);
+  pinMode(ldr, INPUT);
+  pinMode(button1, INPUT_PULLUP);
+  pinMode(button2, INPUT_PULLUP);
+  pinMode(buzzer, OUTPUT);
+}
+
+//Armazenamento de todos os leds em um vetor
+int ledVector[4] = {led1, led2, led3, led4};
+// Converte valores que o ldr recebe de zero a quinze
+int maxCounter[500];
+// Quantidade máxima dentro do vetor
+int binaryVector[500];
+// intervalo máximo de 0 a 15
+int ldrVector[16] = {256, 512, 768, 1024, 1280, 1536, 1792, 2048, 2304, 2560, 2816, 3072, 3328, 3584, 4095};
+// Auxiliar na hora de contar cada vez que o botão é pressionado
+int push = 0;
+// conta valores armazenados no intervalo de 0 a quinze
+int quantity = 0;
+// Contador para a conversão em binários
+int ldrConvert(int valorLdr) {
+//retorna 0
+  if (valorLdr <= ldrVector[0]) {
+    return 0;
+  } else {
+// valor do ldr+intervalo(incremento)
+    for (int i = 0; i < 15; i++) {
+      if (valorLdr > ldrVector[i] && valorLdr <= ldrVector[i + 1]) {
+        return i + 1;
+      }
+    }
+  }
+}
+// conversão de decimal para binário
+int binaryConvert(int value, int position) {
+// auxilia na divisão necessária para a conversão
+  int divisionValue = value;
+  int result[4];
+  for (int i = 2; i >= 0; i--) {
+    result[i] = divisionValue%2;
+    divisionValue = divisionValue/2;
+  }
+// Retorna o número binário e a sua posição
+  return result[position];
+}
+//função responsável por acender o led, value=0 refere-se ao led desligado, value=1 refere-se ao led aceso
+void ledHigh(int led, int value) {
+  if (value == 0) {
+    digitalWrite(ledVector[led], LOW);
+  } else {
+    digitalWrite(ledVector[led], HIGH);
+    tone(buzzer, maxCounter[push - 1]*1000, 2000);
+  }
+}
+void loop() {
+  if (digitalRead(button1) == LOW) {
+// Armazenamento de valor no ldr cada vez que o botão é pressionado
+     push = push + 1;
+    for (int i = 0; i < 4; i++) {
+// calcula a quantidade total de valores
+      quantity = quantity + 1;
+// Acende o led
+      ledHigh(i, binaryConvert(ldrConvert(analogRead(ldr)), i));
+      delay(1000);
+// Guarda todos os valores binários já convertidos
+      binaryVector[quantity - 1] = binaryConvert(ldrConvert(analogRead(ldr)), i);
+    }
+// Guarda os valores do ldr e toca o som específico para cada valor através do buzzer
+    maxCounter[push - 1] = ldrConvert(analogRead(ldr));
+    tone(buzzer, maxCounter[push - 1]*1000, 2000);
+    while (digitalRead(button1) == LOW) {
+      digitalWrite(led1, LOW);
+      digitalWrite(led2, LOW);
+      digitalWrite(led3, LOW);
+      digitalWrite(led4, LOW);
+    }
+  }
+  if (digitalRead(button2) == LOW) {
+//valor binário para cada led
+    for (int i = 0; i < push; i++) {
+      for (int j = 0; j < 4; j++) {
+        ledHigh(j, binaryConvert(maxCounter[i], j));
+      }
+      tone(buzzer, maxCounter[i]*1000, 3000);
+      delay(1000);
+// Zera todo o vetor/array que tinha os valores binários armazenados
+      maxCounter[i] = 0;
+    }
+    for (int i = 0; i < quantity; i++) {
+      binaryVector[i] = 0;
+    }
+    push = 0;
+    quantity = 0;
+    while (digitalRead(button2) == LOW) {
+      digitalWrite(led1, LOW);
+      digitalWrite(led2, LOW);
+      digitalWrite(led3, LOW);
+      digitalWrite(led4, LOW);
+    }
+  }
+}
