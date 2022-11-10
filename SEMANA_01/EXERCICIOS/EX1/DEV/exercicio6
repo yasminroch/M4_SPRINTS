@@ -13,21 +13,31 @@ para ler os sensores e o movimento do robô e no final percorrer o vetor e
 mostrar o movimento a cada direção na maior distância a cada movimento.
 */
 int main(void) {
+//definição das distâncias
   int dist[4] = {30, 75, 12, 40};
+  //posições
   int direita = dist[0];
   int esquerda = dist[1];
   int frente = dist[2];
   int tras = dist[3];
-
+  
+//variável de inserção
   int digito;
+  //variável de parada equivalente a 0
   int parar = 0;
+  variável que guarda o valor 1, que significa continuar
   int continuar = 1;
+  //valor máximo a ser definido
   int valor_maximo;
+  //variável que auxiliará na passagem por todo o vetor
   int i;
+  //impressão e input
   printf("Você deseja continuar? Se sim, digite 1, se não, digite 0");
   scanf("%d", &digito);
 
+//loop para prosseguir com o caminho
   while (digito == continuar) {
+  //parada ao digitar 0
     if (digito == parar) {
       printf("Você parou, a distânica máxima é: %d", dist[0]);
     } else
@@ -58,3 +68,8 @@ int main(void) {
   }
   return 0;
 }
+
+
+/* Em minha percepção, entendi que a premissa é a função receber a posição específica do sensor por meio de sua distância, contemplando as seguintes condições: fazer um mapeamento cada vez que digita 1, máximo de passos, cada passo diminui e o momento de parada ao digitar 0*/ 
+
+
