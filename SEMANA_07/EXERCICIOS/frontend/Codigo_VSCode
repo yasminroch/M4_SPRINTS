@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Jogo Ímpar ou Par</title>
+</head>
+
+<body>
+    <section>
+        <div class="iniciar">
+            <section class="section">
+                <div class="principal">
+                    <h1>Você sabia</h1>
+                    <p>Que além dos humanos, estudos afirmam que abelhas possuem a capacidade de diferenciar
+                        quantidades<br>pares e ímpares?<br>Clique no botão abaixo para iniciar o jogo amistoso:<br><br>
+                    </p>
+                    <button class="jogar"><a href="#pagina2">Iniciar jogo</a></button>
+                </div>
+            </section>
+        </div>
+        <section class="section2">
+            <div id="Apresentacao">
+                <h1>Jogo ímpar ou Par<a name="pagina2"></a></h1>
+                <p class="texto">Escolha se você será o jogador n°1 que corresponde a ímpar e ao campo 1 ou o
+                    jogador<br>n°2, correspondente a par e ao campo 2. Insira qualquer número e espere o outro jogador
+                    fazer o<br> mesmo para saber o ganhador</p>
+            </div>
+            <img src="imagens/Richarlison.png" alt="" class="abelha1">
+            <img src="imagens/Ney.png" alt="" class="abelha2">
+            <div class="centro">
+                <div id="container1">
+                    <p>Dica: esconda o valor após inserir</p>
+                    <p id="jogador1">Campo 1 - Jogador ímpar</p>
+                    <input class="num1" id="campo1" type="number" required>
+                    <button onclick="num1()" id="btn1">Esconder valor</button>
+                    <p id="jogador2">Campo 2 - Jogador Par</p>
+                    <input class="num2" id="campo2" type="number" required>
+                    <button onclick="num2()" id="btn2">Esconder valor</button>
+                    <div id="container2">
+                        <button onclick="clicar()"> Ver resultado</button>
+                        <button id="resetar" onclick="window.location.reload()">Jogar novamente</button>
+                        <p>O resultado é:</p>
+                        <p class="resultado"></p>
+                        <p class="ganhador"></p>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </section>
+
+    <style>
+        body {
+            background: linear-gradient(45deg, #006a4e, #efcc00);
+            font-family: monospace;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+        }
+
+        *,
+        *::after {
+            padding: 0;
+            margin: 0;
+            box-sizing: border-box;
+        }
+
+        .section {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            width: 100vw;
+            height: 100vh;
+            text-align: center;
+        }
+
+        .section2 {
+            width: 100vw;
+            height: 100vh;
+            margin: 30px;
+        }
+
+        button {
+            border: 3px solid #efcc00;
+            background-image: linear-gradient(30deg, #006a4e 50%, transparent 50%);
+            background-size: 500px;
+            background-repeat: no-repeat;
+            background-position: 0%;
+            transition: background 300ms ease-in-out;
+            border-radius: 8px;
+            color: #fff;
+            font-family: sans-serif;
+            font-size: 14px;
+            padding: 8px 10px;
+            margin: 4px;
+        }
+
+        button:hover {
+            background-position: 100%;
+            transition: 1.5s;
+            color: #006a4e;
+            border: 3px solid #efcc00;
+        }
+
+        .centro {
+            position: relative;
+            padding: 30px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            border-radius: 8px;
+            box-shadow: 0 15px 35px rgb(0, 0, 0);
+            width: 40%;
+            margin-left: auto;
+            margin-right: auto;
+            background-color: #fff;
+        }
+
+        h1 {
+            text-align: center;
+            font-size: 40px;
+        }
+
+        .texto {
+            text-align: center;
+            padding: 6px;
+            margin: 5%;
+            font-size: 15px;
+        }
+
+        p {
+            font-size: 15px;
+        }
+
+        .abelha {
+            float: right;
+            width: 30%;
+            opacity: 90%;
+        }
+
+        .abelha1 {
+            float: left;
+            width: 20%;
+        }
+
+        .abelha2 {
+            float: right;
+            width: 20%;
+        }
+
+        input {
+            padding: 8px 10px;
+            position: relative;
+            border: none;
+            outline: none;
+            background: linear-gradient(45deg, #006a4e, #efcc00);
+            color: #000;
+            font-size: 0.9em;
+            letter-spacing: 0.05;
+        }
+
+        a {
+            text-decoration: none;
+            color: #fff;
+        }
+
+        a:hover {
+            color: #006a4e;
+        }
+
+        .jogar {
+            padding: 15px 17px;
+        }
+    </style>
+    
+    <script>
+        function num1() {
+            document.getElementById("campo1").style.display = "none";
+            document.getElementById("btn1").style.display = "none";
+            var jogador1 = document.getElementById("jogador1");
+            jogador1.innerHTML = "O jogador 1 fez o envio.";
+        }
+        function num2() {
+            document.getElementById("campo2").style.display = "none";
+            document.getElementById("btn2").style.display = "none";
+            var jogador2 = document.getElementById("jogador2");
+            jogador2.innerHTML = "O jogador 2 fez o envio.";
+        }
+        function clicar() {
+            var num1 = document.querySelector(".num1").value;
+            var num2 = document.querySelector(".num2").value;
+            var resultado = parseInt(num1) + parseInt(num2);
+            document.querySelector(".resultado").innerHTML = resultado;
+            var erro = "Atenção! Os valores não são válidos.";
+            var ganhador1 = "Parabéns! O ganhador é o jogador 1.";
+            var ganhador2 = "Parabéns! O ganhador é o jogador 2.";
+            if (resultado % 2 == 0)
+                document.querySelector(".ganhador").innerHTML = ganhador2;
+            else
+                document.querySelector(".ganhador").innerHTML = ganhador1;
+            if (document.getElementById("campo1").value.length < 1 && document.getElementById("campo2").value.length < 1)
+                document.querySelector(".ganhador").innerHTML = erro;
+        }
+    </script>
+</body>
+
+</html>
